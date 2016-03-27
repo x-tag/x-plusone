@@ -1,3 +1,56 @@
-x-stub {
-  display: block; 
+
+x-plusone {
+  display: inline-block;
+  position: relative;
+  height: 2em;
+  width: 2em;
+  border-radius: 100%;
+  background: #eee;
+  line-height: 2em;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
 }
+
+x-plusone:before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+  box-sizing: border-box;
+  background: #007152;
+  opacity: 0;
+  z-index: 1;
+  will-change: opacity, transform, -webkit-transform;
+  -webkit-transition: opacity 0.3s ease, -webkit-transform 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  -webkit-transform: translate(-50%, -50%) scale(0);
+  transform: translate(-50%, -50%) scale(0);
+}
+
+  x-plusone[plus]:before {
+    opacity: 1;
+    -webkit-transform: translate(-50%, -50%) scale(1.3);
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+
+x-plusone:after {
+  content: attr(count);
+  display: block;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background: rgba(255,255,255, 0.25);
+  border: 1px solid rgba(0,0,0, 0.15);
+  border-radius: inherit;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+  x-plusone[plus] {
+    color: #fff;
+  }

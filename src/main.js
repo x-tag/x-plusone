@@ -1,23 +1,32 @@
-(function(){  
+(function(){
 
-  // Create your component here
-  // http://x-tags.org/docs
-  
-  xtag.register('x-stub', {
-    lifecycle: {
-      created: function() {},
-      inserted: function() {},
-      removed: function() {},
-      attributeChanged: function() {}
-    }, 
-    events: { 
-    
+  xtag.register('x-plusone', {
+    events: {
+      tap: function(){
+        this.plus = !this.plus;
+      }
     },
     accessors: {
-      
-    }, 
-    methods: {
-      
+      count: {
+        attribute: {
+          def: 0
+        },
+        set: function(val){
+          this.xtag.count = Number(val) || 0;
+        },
+        get: function(){
+          return this.xtag.count;
+        }
+      },
+      plus: {
+        attribute: {
+          boolean: true
+        },
+        set: function(val, old){
+          this.count = this.count + (val ? 1 : old ? -1 : 0);
+          xtag.fireEvent(this, 'plusone' + (val ? 'added' : 'removed'));
+        }
+      }
     }
   });
 
