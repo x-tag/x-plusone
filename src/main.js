@@ -11,11 +11,8 @@
         attribute: {
           def: 0
         },
-        set: function(val){
-          this.xtag.count = Number(val) || 0;
-        },
         get: function(){
-          return this.xtag.count;
+          return Number(this.getAttribute('count'));
         }
       },
       plus: {
@@ -23,8 +20,11 @@
           boolean: true
         },
         set: function(val, old){
-          this.count = this.count + (val ? 1 : old ? -1 : 0);
-          if (val != old) xtag.fireEvent(this, 'plusone', { detail: val });
+          if (val != this.xtag.plus) {
+            this.count = this.count + (val ? 1 : this.xtag.plus ? -1 : 0);
+            this.xtag.plus = val
+            if (val != old) xtag.fireEvent(this, 'plusone', { detail: val });
+          }
         }
       }
     }
