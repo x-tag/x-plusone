@@ -24,7 +24,7 @@
         },
         set: function(val, old){
           this.count = this.count + (val ? 1 : old ? -1 : 0);
-          xtag.fireEvent(this, 'plusone' + (val ? 'added' : 'removed'));
+          if (val != old) xtag.fireEvent(this, 'plusone', { detail: val });
         }
       }
     }
